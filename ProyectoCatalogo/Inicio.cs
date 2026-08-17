@@ -14,8 +14,9 @@ namespace ProyectoCatalogo
 {
     public partial class Inicio : Form
     {
+        private List<Articulo> lista;
         public Inicio()
-        {
+        { 
             InitializeComponent();
         }
 
@@ -33,7 +34,7 @@ namespace ProyectoCatalogo
 
         private void cargar()
         {
-            List<Articulo> lista = new List<Articulo>();
+             lista = new List<Articulo>();
             ArticuloDatos datos = new ArticuloDatos();
             lista = datos.listaArticulos();
             dgvArticulos.DataSource = lista;
@@ -67,6 +68,39 @@ namespace ProyectoCatalogo
             vtnDatos modificar = new vtnDatos(aux);
             modificar.ShowDialog();
             cargar();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Articulo aux =(Articulo) dgvArticulos.CurrentRow.DataBoundItem;
+            AccesoDatos datos = new AccesoDatos();
+            DialogResult resultado = MessageBox.Show("Seguro que desea eliminar el articulo seleccionado?", "ALERTA",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+            if (resultado== DialogResult.Yes)
+            {
+                datos.EliminarElemento(aux);
+                cargar();
+            }
+            
+              
+            
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string filtro = txtFiltroRapido.Text;
+            List<Articulo> filtrada = new List<Articulo>();
+            if (filtro=="")
+            {
+                filtrada=lista;
+            }
+            else
+            {
+                filtrada = lista.FindAll(x => x.nombre.ToLower().Contains(filtro.ToLower()));
+            }
+            dgvArticulos.DataSource = filtrada;
+            dgvArticulos.Columns["Id"].Visible = false;
+            dgvArticulos.Columns["Imagen"].Visible = false;
+
         }
     }
 }

@@ -61,6 +61,24 @@ namespace Controller
             }
 
         }
+
+        public void EliminarElemento(Articulo aux)
+
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearQuery("DELETE from ARTICULOS  WHERE Id=@id");
+                datos.setearConParametros("@id", aux.id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
         public void ModificarElemento(Articulo aux)
 
         {
