@@ -28,18 +28,28 @@ namespace ProyectoCatalogo
             }
             catch (Exception)
             {
-                picBoxImagen.Load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBMlmZMyak30Jn6GOX4jFDAyu90OLghCqL23-lwES2yA&s=10");
+                picBoxImagen.Load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBTO8WZ84puTB_Az1s5EU5E9gm5EBkVyc_4o14bnL9onTQHaUACAE63RA&s=10");
             }
         }
 
+        public void omitirColumnas()
+        {
+            dgvArticulos.Columns["Id"].Visible = false;
+            dgvArticulos.Columns["Imagen"].Visible = false;
+            dgvArticulos.Columns["Codigo"].Visible = false;
+            dgvArticulos.Columns["Marca"].Visible = false;
+            dgvArticulos.Columns["Categoria"].Visible = false;
+            
+            
+
+        }
         private void cargar()
         {
              lista = new List<Articulo>();
             ArticuloDatos datos = new ArticuloDatos();
             lista = datos.listaArticulos();
             dgvArticulos.DataSource = lista;
-            dgvArticulos.Columns["Id"].Visible = false;
-            dgvArticulos.Columns["Imagen"].Visible = false;
+            omitirColumnas();
             mostrarImagen(lista[0].imagen);
         }
 
@@ -50,10 +60,21 @@ namespace ProyectoCatalogo
 
         }
 
+        public void cargarDetalle(Articulo aux)
+        {
+            lblNombreDetalle.Text = "Nombre: "+ aux.nombre;
+            lblPrecioDetalle.Text = "Precio: $" + aux.precio.ToString();
+            lblDescripDetalle.Text = "Descripcion: " + aux.descripcion;
+            lblMarcaDetalle.Text = "Marca: " + aux.marca.descripcion;
+            lblCategoriaDetalle.Text = "Categoria: " + aux.categoria.descripcion;
+            lblCodigoDetalle.Text = "Codigo: " + aux.codigo;
+        }
+
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             mostrarImagen(seleccionado.imagen);
+            cargarDetalle(seleccionado);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -98,9 +119,9 @@ namespace ProyectoCatalogo
                 filtrada = lista.FindAll(x => x.nombre.ToLower().Contains(filtro.ToLower()));
             }
             dgvArticulos.DataSource = filtrada;
-            dgvArticulos.Columns["Id"].Visible = false;
-            dgvArticulos.Columns["Imagen"].Visible = false;
-
+            omitirColumnas();
         }
+
+       
     }
 }

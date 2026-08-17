@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="Controller/Controller.csproj" />
-  <Project Path="Model/Model.csproj" />
-  <Project Path="ProyectoCatalogo/View.csproj" />
+  <Project Path="Controller/Controller.csproj" Id="ee4a39d3-3f93-4bcd-9f6b-677a2dd6258d" />
+  <Project Path="Model/Model.csproj" Id="34a77100-99ad-4db4-9bc5-92704e8e967f" />
+  <Project Path="ProyectoCatalogo/View.csproj" Id="55c97fe0-a11c-41e1-a094-debf68b77e29" />
 </Solution>

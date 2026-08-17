@@ -20,7 +20,8 @@ namespace ProyectoCatalogo
         {
             InitializeComponent();
             this.articulo = articulo;
-            Text = "Modicar Articulo";
+            Text = "Modificar Articulo";
+            lblTitulo.Text = "Modificar articulo";
             txtCodigo.Text = articulo.codigo;
             txtDescripcion.Text = articulo.descripcion;
             txtImagen.Text = articulo.imagen;
@@ -35,6 +36,7 @@ namespace ProyectoCatalogo
             InitializeComponent();
             articulo = null;
             Text = "Cargar nuevo articulo";
+            
         }
         public void mostrarImagen(string url)
         {
@@ -59,6 +61,7 @@ namespace ProyectoCatalogo
             CategoriaDatos categoria = new CategoriaDatos();
             cboMarca.DataSource = marca.listaMarcas();
             cboCategoria.DataSource = categoria.listaCategorias();
+            mostrarImagen(txtImagen.Text);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
