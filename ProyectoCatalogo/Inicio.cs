@@ -28,7 +28,7 @@ namespace ProyectoCatalogo
             }
             catch (Exception)
             {
-                picBoxImagen.Load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBTO8WZ84puTB_Az1s5EU5E9gm5EBkVyc_4o14bnL9onTQHaUACAE63RA&s=10");
+               // picBoxImagen.Load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBTO8WZ84puTB_Az1s5EU5E9gm5EBkVyc_4o14bnL9onTQHaUACAE63RA&s=10");
             }
         }
 
@@ -45,7 +45,7 @@ namespace ProyectoCatalogo
         }
         private void cargar()
         {
-             lista = new List<Articulo>();
+            lista = new List<Articulo>();
             ArticuloDatos datos = new ArticuloDatos();
             lista = datos.listaArticulos();
             dgvArticulos.DataSource = lista;
@@ -56,7 +56,9 @@ namespace ProyectoCatalogo
         public void Inicio_Load(object sender, EventArgs e)
         {
             cargar();
-          
+            cboCampo.Items.Add("Categoria");
+            cboCampo.Items.Add("Marca");
+
 
         }
 
@@ -122,6 +124,39 @@ namespace ProyectoCatalogo
             omitirColumnas();
         }
 
-       
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cboCampo.SelectedItem.ToString();
+            if(opcion== "Marca")
+            {
+                MarcaDatos marca = new MarcaDatos();
+                
+                cboCriterio.DataSource = marca.listaMarcas();
+                
+            }
+            else
+            {
+                CategoriaDatos categoria = new CategoriaDatos();
+                
+                cboCriterio.DataSource = categoria.listaCategorias();
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ArticuloDatos articulo = new ArticuloDatos();
+            List<Articulo> lista = new List<Articulo>();
+            lista = articulo.listaArticulos();
+            string filtrarPor = cboCampo.SelectedItem.ToString();
+            string tipo = cboCriterio.SelectedItem.ToString();
+            AccesoDatos datos = new AccesoDatos();
+            dgvArticulos.DataSource = datos.Filtrar(lista,filtrarPor, tipo);
+            
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            cargar();
+        }
     }
 }

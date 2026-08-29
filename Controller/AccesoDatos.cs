@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Model;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Sql;
-using Model;
-using System.Data.SqlClient;
-using System.Data;
 namespace Controller
 {
     public class AccesoDatos
@@ -146,6 +147,31 @@ namespace Controller
             }
         }
 
+      public List<Articulo> Filtrar(List <Articulo> lista,string filtrarPor,string tipo)
+        {
+            List<Articulo> auxLista = new List<Articulo>();
+            
+            foreach (Articulo auxArticulo in lista)
+            {
+                if (filtrarPor=="Marca")
+                {
+                    if (auxArticulo.marca.descripcion == tipo)
+                    {
+                        auxLista.Add(auxArticulo);
+                    }
+                }
+                else
+                {
+                    if (auxArticulo.categoria.descripcion == tipo)
+                    {
+                        auxLista.Add(auxArticulo);
+                    }
+                }
+
+            }
+            return auxLista;
+        }
+       
 
 
     }
