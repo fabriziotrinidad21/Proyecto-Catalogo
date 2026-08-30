@@ -50,9 +50,13 @@
             this.lblCriterio = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
+            this.trbFiltro = new System.Windows.Forms.TrackBar();
+            this.lblPrecioBar = new System.Windows.Forms.Label();
+            this.lblFiltrarPrecio = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxImagen)).BeginInit();
             this.panelTitulo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trbFiltro)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvArticulos
@@ -309,12 +313,46 @@
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
+            // trbFiltro
+            // 
+            this.trbFiltro.Location = new System.Drawing.Point(416, 469);
+            this.trbFiltro.Name = "trbFiltro";
+            this.trbFiltro.Size = new System.Drawing.Size(246, 56);
+            this.trbFiltro.TabIndex = 22;
+            this.trbFiltro.Tag = "";
+            this.trbFiltro.Scroll += new System.EventHandler(this.trbFiltro_Scroll);
+            // 
+            // lblPrecioBar
+            // 
+            this.lblPrecioBar.AutoSize = true;
+            this.lblPrecioBar.Font = new System.Drawing.Font("Arial", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecioBar.ForeColor = System.Drawing.Color.White;
+            this.lblPrecioBar.Location = new System.Drawing.Point(411, 516);
+            this.lblPrecioBar.Name = "lblPrecioBar";
+            this.lblPrecioBar.Size = new System.Drawing.Size(18, 19);
+            this.lblPrecioBar.TabIndex = 23;
+            this.lblPrecioBar.Text = "$";
+            // 
+            // lblFiltrarPrecio
+            // 
+            this.lblFiltrarPrecio.AutoSize = true;
+            this.lblFiltrarPrecio.Font = new System.Drawing.Font("Arial", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFiltrarPrecio.ForeColor = System.Drawing.Color.White;
+            this.lblFiltrarPrecio.Location = new System.Drawing.Point(244, 479);
+            this.lblFiltrarPrecio.Name = "lblFiltrarPrecio";
+            this.lblFiltrarPrecio.Size = new System.Drawing.Size(144, 19);
+            this.lblFiltrarPrecio.TabIndex = 24;
+            this.lblFiltrarPrecio.Text = "Filtrar por precio:";
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1242, 759);
+            this.Controls.Add(this.lblFiltrarPrecio);
+            this.Controls.Add(this.lblPrecioBar);
+            this.Controls.Add(this.trbFiltro);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.lblCriterio);
@@ -345,6 +383,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBoxImagen)).EndInit();
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trbFiltro)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -374,6 +413,9 @@
         private System.Windows.Forms.Label lblCriterio;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.TrackBar trbFiltro;
+        private System.Windows.Forms.Label lblPrecioBar;
+        private System.Windows.Forms.Label lblFiltrarPrecio;
     }
 }
 

@@ -28,7 +28,7 @@ namespace ProyectoCatalogo
             }
             catch (Exception)
             {
-               // picBoxImagen.Load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBTO8WZ84puTB_Az1s5EU5E9gm5EBkVyc_4o14bnL9onTQHaUACAE63RA&s=10");
+                picBoxImagen.Load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBTO8WZ84puTB_Az1s5EU5E9gm5EBkVyc_4o14bnL9onTQHaUACAE63RA&s=10");
             }
         }
 
@@ -51,6 +51,14 @@ namespace ProyectoCatalogo
             dgvArticulos.DataSource = lista;
             omitirColumnas();
             mostrarImagen(lista[0].imagen);
+            
+            trbFiltro.Maximum = 50000;
+            trbFiltro.Minimum = 0;
+            trbFiltro.TickFrequency = 25000;
+            trbFiltro.Value = trbFiltro.Maximum;
+            lblPrecioBar.Text = "Hasta $" + trbFiltro.Value;
+            cboCampo.SelectedIndex = -1;
+            cboCriterio.SelectedIndex = -1;
         }
 
         public void Inicio_Load(object sender, EventArgs e)
@@ -58,8 +66,6 @@ namespace ProyectoCatalogo
             cargar();
             cboCampo.Items.Add("Categoria");
             cboCampo.Items.Add("Marca");
-
-
         }
 
         public void cargarDetalle(Articulo aux)
@@ -126,20 +132,24 @@ namespace ProyectoCatalogo
 
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string opcion = cboCampo.SelectedItem.ToString();
-            if(opcion== "Marca")
+            if (cboCampo.SelectedItem != null)
             {
-                MarcaDatos marca = new MarcaDatos();
-                
-                cboCriterio.DataSource = marca.listaMarcas();
-                
+                string opcion = cboCampo.SelectedItem.ToString();
+                if (opcion == "Marca")
+                {
+                    MarcaDatos marca = new MarcaDatos();
+
+                    cboCriterio.DataSource = marca.listaMarcas();
+
+                }
+                else
+                {
+                    CategoriaDatos categoria = new CategoriaDatos();
+
+                    cboCriterio.DataSource = categoria.listaCategorias();
+                }
             }
-            else
-            {
-                CategoriaDatos categoria = new CategoriaDatos();
-                
-                cboCriterio.DataSource = categoria.listaCategorias();
-            }
+            
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -157,6 +167,18 @@ namespace ProyectoCatalogo
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             cargar();
+            
+       
+        }
+
+        private void trbFiltro_Scroll(object sender, EventArgs e)
+        {
+            int precioSeleccionado = trbFiltro.Value;
+            lblPrecioBar.Text = "Hasta $" + trbFiltro.Value;
+            List<Articulo> listaAux = lista;
+
+            listaAux = lista.FindAll(x => x.precio < precioSeleccionado);
+            dgvArticulos.DataSource = listaAux;
         }
     }
 }
