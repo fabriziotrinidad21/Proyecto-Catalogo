@@ -47,6 +47,9 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.lblSinNombre = new System.Windows.Forms.Label();
+            this.lblSinCod = new System.Windows.Forms.Label();
+            this.lblSinPrecio = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pboImagen)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -229,12 +232,48 @@
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "Nuevo articulo";
             // 
+            // lblSinNombre
+            // 
+            this.lblSinNombre.AutoSize = true;
+            this.lblSinNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSinNombre.ForeColor = System.Drawing.Color.Red;
+            this.lblSinNombre.Location = new System.Drawing.Point(358, 107);
+            this.lblSinNombre.Name = "lblSinNombre";
+            this.lblSinNombre.Size = new System.Drawing.Size(23, 29);
+            this.lblSinNombre.TabIndex = 18;
+            this.lblSinNombre.Text = "*";
+            // 
+            // lblSinCod
+            // 
+            this.lblSinCod.AutoSize = true;
+            this.lblSinCod.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSinCod.ForeColor = System.Drawing.Color.Red;
+            this.lblSinCod.Location = new System.Drawing.Point(358, 150);
+            this.lblSinCod.Name = "lblSinCod";
+            this.lblSinCod.Size = new System.Drawing.Size(23, 29);
+            this.lblSinCod.TabIndex = 19;
+            this.lblSinCod.Text = "*";
+            // 
+            // lblSinPrecio
+            // 
+            this.lblSinPrecio.AutoSize = true;
+            this.lblSinPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSinPrecio.ForeColor = System.Drawing.Color.Red;
+            this.lblSinPrecio.Location = new System.Drawing.Point(358, 283);
+            this.lblSinPrecio.Name = "lblSinPrecio";
+            this.lblSinPrecio.Size = new System.Drawing.Size(23, 29);
+            this.lblSinPrecio.TabIndex = 20;
+            this.lblSinPrecio.Text = "*";
+            // 
             // vtnDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(417, 681);
+            this.Controls.Add(this.lblSinPrecio);
+            this.Controls.Add(this.lblSinCod);
+            this.Controls.Add(this.lblSinNombre);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
@@ -289,5 +328,8 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Label lblSinNombre;
+        private System.Windows.Forms.Label lblSinCod;
+        private System.Windows.Forms.Label lblSinPrecio;
     }
 }

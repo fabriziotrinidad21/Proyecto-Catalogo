@@ -62,6 +62,9 @@ namespace ProyectoCatalogo
             cboMarca.DataSource = marca.listaMarcas();
             cboCategoria.DataSource = categoria.listaCategorias();
             mostrarImagen(txtImagen.Text);
+            lblSinCod.Visible = false;
+            lblSinNombre.Visible = false;
+            lblSinPrecio.Visible = false;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -73,38 +76,70 @@ namespace ProyectoCatalogo
         {
             AccesoDatos datos = new AccesoDatos();
             try
-            {
-                if (articulo == null)
+              {if ((txtNombre.Text != "") && (txtPrecio.Text != "") && (txtCodigo.Text != ""))
                 {
-                    articulo = new Articulo();
-                }
-                articulo.imagen = txtImagen.Text;
-                articulo.descripcion = txtDescripcion.Text;
-                decimal precioAux;
-                if (!decimal.TryParse(txtPrecio.Text, out precioAux))
-                {
-                    MessageBox.Show("El precio ingresado no es válido");
-                    return;
-                }
-                articulo.precio = precioAux;
-                articulo.categoria = (Categoria)cboCategoria.SelectedValue;
-                articulo.marca = (Marca)cboMarca.SelectedValue;
-                articulo.nombre = txtNombre.Text;
-                articulo.codigo = txtCodigo.Text;
+                    if (articulo == null)
+                    {
+                        articulo = new Articulo();
+                    }
+                    articulo.imagen = txtImagen.Text;
+                    articulo.descripcion = txtDescripcion.Text;
+                    decimal precioAux;
+                    if (!decimal.TryParse(txtPrecio.Text, out precioAux))
+                    {
+                        MessageBox.Show("El precio ingresado no es válido");
+                        return;
+                    }
+                    articulo.precio = precioAux;
+                    articulo.categoria = (Categoria)cboCategoria.SelectedValue;
+                    articulo.marca = (Marca)cboMarca.SelectedValue;
+                    articulo.nombre = txtNombre.Text;
+                    articulo.codigo = txtCodigo.Text;
+                    
+                    if (articulo.id == 0)
+                    {
+                        datos.insertarElemento(articulo);
+                        MessageBox.Show("Agregado correctamente");
+                    }
+                    else
+                    {
+                        datos.ModificarElemento(articulo);
+                        MessageBox.Show("Modificado correctamente");
+                    }
 
-                if (articulo.id == 0)
-                {
-                    datos.insertarElemento(articulo);
-                    MessageBox.Show("Agregado correctamente");
+                    Close();
+
                 }
                 else
                 {
-                    datos.ModificarElemento(articulo);
-                    MessageBox.Show("Modificado correctamente");
+                    MessageBox.Show("Debes completar los campos obligatorios (Nombre,Codigo,Precio)", "ATENCION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (txtCodigo.Text == "")
+                    {
+                        lblSinPrecio.Visible = true;
+                    }
+                    else
+                        lblSinPrecio.Visible = false;
+                    if (txtNombre.Text == "")
+                    {
+                        lblSinNombre.Visible = true;
+
+                    }
+                    else
+                        lblSinNombre.Visible = false;
+
+                    if (txtCodigo.Text == "")
+                    {
+                        lblSinCod.Visible = true;
+                    }
+                    else
+                        lblSinCod.Visible = false;
+
                 }
+
+               
                 
                 
-                Close();
+                
             }
             catch (Exception)
             {
